@@ -32,10 +32,7 @@ public:
     
     //Copy Constructor
     ChatBot(const ChatBot &chatbot);
-	
-    //Move Constructor
     ChatBot(ChatBot&& chatbot);
-    
     ChatBot& operator=(const ChatBot &chatbot);
     ChatBot& operator=(ChatBot &&chatbot);
 	
