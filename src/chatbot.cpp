@@ -48,20 +48,36 @@ ChatBot::~ChatBot()
 ChatBot::ChatBot(ChatBot& chatBot) {
   	std::cout << "ChatBot Copy Constructur" << std::endl;
 	//make deep copy of image
-  	_image =  new wxBitmap(filename, wxBITMAP_TYPE_PNG);
+  	_image =  new wxBitmap();
   	*_image = *chatBot._image;
-  
+  	//shallow copy of resources that are not owned??
   	_chatLogic = chatBot._chatLogic;
     _rootNode = chatBot._rootNode;
-  
 }
 
 ChatBot::ChatBot(ChatBot&& chatBot) {
   	std::cout << "ChatBot Move Constructur" << std::endl;
+  	_image =  chatBot._image;
+  	_chatLogic = chatBot._chatLogic;
+    _rootNode = chatBot._rootNode;
+  	chatBot._image = nullptr;
+  	chatBot._chatLogic = nullptr;
+  	chatBot._rootNode = nullptr;
 }
 
 ChatBot& ChatBot::operator=(ChatBot &chatBot) {
   	std::cout << "ChatBot Copy Assignment" << std::endl;
+  	if (this == &chatBot) {
+      return *this;
+    }
+  
+  	_image =  new wxBitmap();
+  	*_image = *chatBot._image;
+  	//shallow copy of resources that are not owned??
+  	_chatLogic = chatBot._chatLogic;
+    _rootNode = chatBot._rootNode;
+  
+  	return *this;
 }
     
 ChatBot& ChatBot::operator=(ChatBot &&chatBot) {
