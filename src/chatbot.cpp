@@ -44,6 +44,16 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot(ChatBot&& chatBot) {
+  
+}
+
+ChatBot& ChatBot::operator=(const ChatBot &chatBot) {
+}
+    
+ChatBot& ChatBot::operator=(ChatBot &&chatBot) {
+  
+}
 
 ////
 //// EOF STUDENT CODE
