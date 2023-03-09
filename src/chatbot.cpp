@@ -57,6 +57,7 @@ ChatBot::ChatBot(ChatBot& chatBot) {
 
 ChatBot::ChatBot(ChatBot&& chatBot) {
   	std::cout << "ChatBot Move Constructur" << std::endl;
+   	delete _image;
   	_image =  chatBot._image;
   	_chatLogic = chatBot._chatLogic;
     _rootNode = chatBot._rootNode;
@@ -82,6 +83,19 @@ ChatBot& ChatBot::operator=(ChatBot &chatBot) {
     
 ChatBot& ChatBot::operator=(ChatBot &&chatBot) {
   	std::cout << "ChatBot Move Assignment" << std::endl;
+    if (this == &chatBot) {
+      return *this;
+    }
+  
+   	delete _image;
+  	_image =  chatBot._image;
+  	_chatLogic = chatBot._chatLogic;
+    _rootNode = chatBot._rootNode;
+  	chatBot._image = nullptr;
+  	chatBot._chatLogic = nullptr;
+  	chatBot._rootNode = nullptr;
+  
+  	return *this;
 }
 
 ////
