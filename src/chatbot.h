@@ -30,13 +30,11 @@ public:
     //// STUDENT CODE
     ////
     
-    //Copy Constructor
-    /*
+ 
     ChatBot(ChatBot &chatbot);
     ChatBot(ChatBot&& chatbot);
     ChatBot& operator=(ChatBot &chatbot);
     ChatBot& operator=(ChatBot &&chatbot);
-	*/
     ////
     //// EOF STUDENT CODE
 

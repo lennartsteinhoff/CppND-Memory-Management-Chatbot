@@ -44,9 +44,16 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
-/*
+
 ChatBot::ChatBot(ChatBot& chatBot) {
   	std::cout << "ChatBot Copy Constructur" << std::endl;
+	//make deep copy of image
+  	_image =  new wxBitmap(filename, wxBITMAP_TYPE_PNG);
+  	*_image = *chatBot._image;
+  
+  	_chatLogic = chatBot._chatLogic;
+    _rootNode = chatBot._rootNode;
+  
 }
 
 ChatBot::ChatBot(ChatBot&& chatBot) {
@@ -60,7 +67,6 @@ ChatBot& ChatBot::operator=(ChatBot &chatBot) {
 ChatBot& ChatBot::operator=(ChatBot &&chatBot) {
   	std::cout << "ChatBot Move Assignment" << std::endl;
 }
-*/
 
 ////
 //// EOF STUDENT CODE
