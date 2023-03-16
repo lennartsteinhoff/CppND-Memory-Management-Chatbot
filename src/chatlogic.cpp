@@ -11,6 +11,8 @@
 #include "chatbot.h"
 #include "chatlogic.h"
 
+class ChatBot;
+
 
 ChatLogic::ChatLogic()
 {
@@ -18,13 +20,10 @@ ChatLogic::ChatLogic()
     ////
 
     // create instance of chatbot
-    _chatBot = new ChatBot("../images/chatbot.png");
-  
-  	ChatBot tmpChatBot;
-  	tmpChatBot = *_chatBot;
+    //_chatBot = new ChatBot("../images/chatbot.png"); // CHANGED TASK5
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-    _chatBot->SetChatLogicHandle(this);
+    _chatBot.SetChatLogicHandle(this); // CHANGED TASK5
   
 
     ////
@@ -37,7 +36,7 @@ ChatLogic::~ChatLogic()
     ////
 
     // delete chatbot instance
-    delete _chatBot;
+    // delete _chatBot; //CHANGED TASK5
 
     // delete all nodes
     // for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
@@ -222,8 +221,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     }
 
     // add chatbot to graph root node
-    _chatBot->SetRootNode(rootNode); //CHANGED
-    rootNode->MoveChatbotHere(_chatBot);
+  	_chatBot = ChatBot("../images/chatbot.png"); // CHANGED TASK5
+    _chatBot.SetRootNode(rootNode); // CHANGED TASK5
+    rootNode->MoveChatbotHere(std::move(_chatBot)); // CHANGED TASK5
     
     ////
     //// EOF STUDENT CODE
@@ -234,14 +234,14 @@ void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog *panelDialog)
     _panelDialog = panelDialog;
 }
 
-void ChatLogic::SetChatbotHandle(ChatBot *chatbot)
+void ChatLogic::SetChatbotHandle(ChatBot chatbot) // CHANGED TASK5
 {
     _chatBot = chatbot;
 }
 
 void ChatLogic::SendMessageToChatbot(std::string message)
 {
-    _chatBot->ReceiveMessageFromUser(message);
+    _chatBot.ReceiveMessageFromUser(message);
 }
 
 void ChatLogic::SendMessageToUser(std::string message)
@@ -251,5 +251,5 @@ void ChatLogic::SendMessageToUser(std::string message)
 
 wxBitmap *ChatLogic::GetImageFromChatbot()
 {
-    return _chatBot->GetImageHandle();
+    return _chatBot.GetImageHandle();
 }

@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "chatgui.h"
+#include "chatbot.h"
 
 // forward declarations
 class ChatBot;
@@ -29,7 +30,7 @@ private:
 
     // data handles (not owned)
     GraphNode *_currentNode;
-    ChatBot *_chatBot;
+    ChatBot _chatBot; // CHANGED TASK5
     ChatBotPanelDialog *_panelDialog;
 
     // proprietary type definitions
@@ -46,7 +47,7 @@ public:
 
     // getter / setter
     void SetPanelDialogHandle(ChatBotPanelDialog *panelDialog);
-    void SetChatbotHandle(ChatBot *chatbot);
+    void SetChatbotHandle(ChatBot chatbot);
 
     // proprietary functions
     void LoadAnswerGraphFromFile(std::string filename);
