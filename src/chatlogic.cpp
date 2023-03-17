@@ -18,12 +18,13 @@ ChatLogic::ChatLogic()
 {
     //// STUDENT CODE
     ////
+  	std::cout << "ChatLogic Constructor" << std::endl;
 
     // create instance of chatbot
-    //_chatBot = new ChatBot("../images/chatbot.png"); // CHANGED TASK5
+    _chatBot = new ChatBot("../images/chatbot.png"); // CHANGED TASK5
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-    _chatBot.SetChatLogicHandle(this); // CHANGED TASK5
+    _chatBot->SetChatLogicHandle(this); // CHANGED TASK5
   
 
     ////
@@ -34,6 +35,8 @@ ChatLogic::~ChatLogic()
 {
     //// STUDENT CODE
     ////
+  
+  	std::cout << "ChatLogic Destructor" << std::endl;
 
     // delete chatbot instance
     // delete _chatBot; //CHANGED TASK5
@@ -221,9 +224,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     }
 
     // add chatbot to graph root node
-  	_chatBot = ChatBot("../images/chatbot.png"); // CHANGED TASK5
-    _chatBot.SetRootNode(rootNode); // CHANGED TASK5
-    rootNode->MoveChatbotHere(std::move(_chatBot)); // CHANGED TASK5
+  	ChatBot tmp = ChatBot(*_chatBot); // CHANGED TASK5
+    tmp.SetRootNode(rootNode); // CHANGED TASK5
+    rootNode->MoveChatbotHere(std::move(tmp)); // CHANGED TASK5
     
     ////
     //// EOF STUDENT CODE
@@ -234,14 +237,14 @@ void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog *panelDialog)
     _panelDialog = panelDialog;
 }
 
-void ChatLogic::SetChatbotHandle(ChatBot chatbot) // CHANGED TASK5
+void ChatLogic::SetChatbotHandle(ChatBot *chatbot) // CHANGED TASK5
 {
     _chatBot = chatbot;
 }
 
 void ChatLogic::SendMessageToChatbot(std::string message)
 {
-    _chatBot.ReceiveMessageFromUser(message);
+    _chatBot->ReceiveMessageFromUser(message);
 }
 
 void ChatLogic::SendMessageToUser(std::string message)
@@ -251,5 +254,5 @@ void ChatLogic::SendMessageToUser(std::string message)
 
 wxBitmap *ChatLogic::GetImageFromChatbot()
 {
-    return _chatBot.GetImageHandle();
+    return _chatBot->GetImageHandle();
 }

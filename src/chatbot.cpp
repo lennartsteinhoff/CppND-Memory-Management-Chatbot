@@ -45,25 +45,38 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
-ChatBot::ChatBot(ChatBot& chatBot) {
-  	std::cout << "ChatBot Copy Constructur" << std::endl;
-	//make deep copy of image
-  	_image =  new wxBitmap();
-  	*_image = *chatBot._image;
-  	//shallow copy of resources that are not owned??
-  	_chatLogic = chatBot._chatLogic;
-    _rootNode = chatBot._rootNode;
+
+ChatBot::ChatBot(ChatBot &chatBot) {
+  std::cout << "ChatBot Copy Constructor" << std::endl;
+  // Assign data from source
+  if (chatBot._image != NULL) {
+    _image = new wxBitmap(*chatBot._image);
+  } else {
+    _image = NULL;
+  }
+  _currentNode = chatBot._currentNode;
+  _rootNode = chatBot._rootNode;
+  _chatLogic = chatBot._chatLogic;
+  _chatLogic->SetChatbotHandle(this);
 }
 
+
 ChatBot::ChatBot(ChatBot&& chatBot) {
-  	std::cout << "ChatBot Move Constructur" << std::endl;
-   	delete _image;
-  	_image =  chatBot._image;
+  	std::cout << "ChatBot Move Constructur " << "Adress before: " << &chatBot << " Adress after:" << this << std::endl;
+  
+  	if (chatBot._image != nullptr) {
+    	this->_image = new wxBitmap(*chatBot._image);
+  	} else {
+    	this->_image = nullptr;
+  	}
+//  	_image =  chatBot._image;
   	_chatLogic = chatBot._chatLogic;
     _rootNode = chatBot._rootNode;
+  	this->_chatLogic->SetChatbotHandle(this);
   	chatBot._image = nullptr;
   	chatBot._chatLogic = nullptr;
   	chatBot._rootNode = nullptr;
+  	std::cout << "ChatBot Move Constructur finished" << std::endl;
 }
 
 ChatBot& ChatBot::operator=(ChatBot &chatBot) {
@@ -80,20 +93,29 @@ ChatBot& ChatBot::operator=(ChatBot &chatBot) {
   
   	return *this;
 }
+
     
 ChatBot& ChatBot::operator=(ChatBot &&chatBot) {
-  	std::cout << "ChatBot Move Assignment" << std::endl;
+  	std::cout << "ChatBot Move Assignment"  << "Adress before: " << &chatBot << " Adress after:" << this << std::endl;
     if (this == &chatBot) {
       return *this;
     }
-  
-   	delete _image;
-  	_image =  chatBot._image;
+    if (chatBot._image != nullptr) {
+    	this->_image = new wxBitmap(*chatBot._image);
+  	} else {
+    	this->_image = nullptr;
+  	}
+//  	_image =  chatBot._image;
   	_chatLogic = chatBot._chatLogic;
     _rootNode = chatBot._rootNode;
+  	this->_currentNode = chatBot._currentNode;
+  	this->_chatLogic->SetChatbotHandle(this);
   	chatBot._image = nullptr;
   	chatBot._chatLogic = nullptr;
   	chatBot._rootNode = nullptr;
+  
+  
+  	std::cout << "ChatBot Move Assignment finished" << std::endl;
   
   	return *this;
 }
@@ -103,6 +125,9 @@ ChatBot& ChatBot::operator=(ChatBot &&chatBot) {
 
 void ChatBot::ReceiveMessageFromUser(std::string message)
 {
+    std::cout << "" << std::endl;
+  	std::cout << "Received new message" << std::endl;
+  	std::cout << "--------------------\n\n" << std::endl;
     // loop over all edges and keywords and compute Levenshtein distance to query
     typedef std::pair<GraphEdge *, int> EdgeDist;
     std::vector<EdgeDist> levDists; // format is <ptr,levDist>

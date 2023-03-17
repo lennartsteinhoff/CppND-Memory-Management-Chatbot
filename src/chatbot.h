@@ -31,10 +31,10 @@ public:
     ////
     
  
-    ChatBot(ChatBot &chatbot);
-    ChatBot(ChatBot&& chatbot);
-    ChatBot& operator=(ChatBot &chatbot);
-    ChatBot& operator=(ChatBot &&chatbot);
+    ChatBot(ChatBot &);
+    ChatBot(ChatBot&&);
+    ChatBot& operator=(ChatBot &);
+    ChatBot& operator=(ChatBot &&);
     ////
     //// EOF STUDENT CODE
 
