@@ -30,7 +30,7 @@ private:
 
     // data handles (not owned)
     GraphNode *_currentNode;
-    ChatBot *_chatBot; // CHANGED TASK5
+    ChatBot *_chatBot = nullptr; // CHANGED TASK5
     ChatBotPanelDialog *_panelDialog;
 
     // proprietary type definitions
