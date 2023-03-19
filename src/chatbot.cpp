@@ -65,14 +65,13 @@ ChatBot::ChatBot(ChatBot&& chatBot) {
   	std::cout << "ChatBot Move Constructur " << std::endl;
   
   	if (chatBot._image != nullptr) {
-    	this->_image = new wxBitmap(*chatBot._image);
+    	_image = new wxBitmap(*chatBot._image);
   	} else {
-    	this->_image = nullptr;
+    	_image = nullptr;
   	}
-//  	_image =  chatBot._image;
   	_chatLogic = chatBot._chatLogic;
     _rootNode = chatBot._rootNode;
-  	this->_chatLogic->SetChatbotHandle(this);
+	_chatLogic->SetChatbotHandle(this);
   	chatBot._image = nullptr;
   	chatBot._chatLogic = nullptr;
   	chatBot._rootNode = nullptr;
@@ -100,20 +99,17 @@ ChatBot& ChatBot::operator=(ChatBot &&chatBot) {
       return *this;
     }
     if (chatBot._image != nullptr) {
-    	this->_image = new wxBitmap(*chatBot._image);
+    	_image = new wxBitmap(*chatBot._image);
   	} else {
-    	this->_image = nullptr;
+    	_image = nullptr;
   	}
-//  	_image =  chatBot._image;
   	_chatLogic = chatBot._chatLogic;
     _rootNode = chatBot._rootNode;
-  	this->_currentNode = chatBot._currentNode;
-  	this->_chatLogic->SetChatbotHandle(this);
+  	_currentNode = chatBot._currentNode;
+  	_chatLogic->SetChatbotHandle(this);
   	chatBot._image = nullptr;
   	chatBot._chatLogic = nullptr;
   	chatBot._rootNode = nullptr;
-  
-  
   	return *this;
 }
 
