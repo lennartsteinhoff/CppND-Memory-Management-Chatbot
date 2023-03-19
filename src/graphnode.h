@@ -50,7 +50,7 @@ public:
     //// STUDENT CODE
     ////
 
-    void MoveChatbotHere(ChatBot chatbot); //CHANGED TASK5
+    void MoveChatbotHere(ChatBot &&chatbot); //CHANGED TASK5
 
     ////
     //// EOF STUDENT CODE

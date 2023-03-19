@@ -62,7 +62,7 @@ ChatBot::ChatBot(ChatBot &chatBot) {
 
 
 ChatBot::ChatBot(ChatBot&& chatBot) {
-  	std::cout << "ChatBot Move Constructur " << "Adress before: " << &chatBot << " Adress after:" << this << std::endl;
+  	std::cout << "ChatBot Move Constructur " << std::endl;
   
   	if (chatBot._image != nullptr) {
     	this->_image = new wxBitmap(*chatBot._image);
@@ -76,7 +76,6 @@ ChatBot::ChatBot(ChatBot&& chatBot) {
   	chatBot._image = nullptr;
   	chatBot._chatLogic = nullptr;
   	chatBot._rootNode = nullptr;
-  	std::cout << "ChatBot Move Constructur finished" << std::endl;
 }
 
 ChatBot& ChatBot::operator=(ChatBot &chatBot) {
@@ -96,7 +95,7 @@ ChatBot& ChatBot::operator=(ChatBot &chatBot) {
 
     
 ChatBot& ChatBot::operator=(ChatBot &&chatBot) {
-  	std::cout << "ChatBot Move Assignment"  << "Adress before: " << &chatBot << " Adress after:" << this << std::endl;
+  	std::cout << "ChatBot Move Assignment"  <<  std::endl;
     if (this == &chatBot) {
       return *this;
     }
@@ -114,8 +113,6 @@ ChatBot& ChatBot::operator=(ChatBot &&chatBot) {
   	chatBot._chatLogic = nullptr;
   	chatBot._rootNode = nullptr;
   
-  
-  	std::cout << "ChatBot Move Assignment finished" << std::endl;
   
   	return *this;
 }
