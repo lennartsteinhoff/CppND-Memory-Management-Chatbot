@@ -14,48 +14,9 @@
 class ChatBot;
 
 
-ChatLogic::ChatLogic()
-{
-    //// STUDENT CODE
-    ////
-  	std::cout << "ChatLogic Constructor" << std::endl;
+ChatLogic::ChatLogic() {}
 
-    // create instance of chatbot
-//    _chatBot = new ChatBot("../images/chatbot.png"); // CHANGED TASK5
-
-    // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-//    _chatBot->SetChatLogicHandle(this); // CHANGED TASK5
-  
-
-    ////
-    //// EOF STUDENT CODE
-}
-
-ChatLogic::~ChatLogic()
-{
-    //// STUDENT CODE
-    ////
-  
-  	std::cout << "ChatLogic Destructor" << std::endl;
-
-    // delete chatbot instance
-    // delete _chatBot; //CHANGED TASK5
-
-    // delete all nodes
-    // for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
-    // {
-    //    delete *it;
-    //}
-
-    //delete all edges
-    // for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
-    // {
-        //delete *it;
-    // }
-
-    ////
-    //// EOF STUDENT CODE
-}
+ChatLogic::~ChatLogic() {}
 
 template <typename T>
 void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens, T &element)
