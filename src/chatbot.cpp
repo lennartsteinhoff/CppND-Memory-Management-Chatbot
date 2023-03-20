@@ -65,7 +65,9 @@ ChatBot::ChatBot(ChatBot&& chatBot) {
   	std::cout << "ChatBot Move Constructur " << std::endl;
   
   	if (chatBot._image != nullptr) {
-    	_image = new wxBitmap(*chatBot._image);
+    	_image = chatBot._image;
+      	chatBot._image = nullptr;
+      	
   	} else {
     	_image = nullptr;
   	}
@@ -99,7 +101,8 @@ ChatBot& ChatBot::operator=(ChatBot &&chatBot) {
       return *this;
     }
     if (chatBot._image != nullptr) {
-    	_image = new wxBitmap(*chatBot._image);
+    	_image = chatBot._image;
+      	chatBot._image = nullptr;
   	} else {
     	_image = nullptr;
   	}
